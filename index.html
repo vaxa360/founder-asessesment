@@ -111,7 +111,7 @@
     .role-section::before{content:"";position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(43,127,255,.1) 0%,transparent 70%)}
     .role-section-label{font-family:"Syne",sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin-bottom:5px}
     .role-disclaimer{font-size:12px;color:var(--subtle);margin-bottom:20px;line-height:1.65}
-    .role-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:20px}
+    .role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
     .role-card{background:rgba(5,14,42,.55);border:1px solid var(--border);border-radius:13px;padding:16px 12px;text-align:center;transition:all .3s ease;position:relative}
     .role-card.primary{border-color:var(--vivid);background:rgba(43,127,255,.15);box-shadow:0 0 18px rgba(43,127,255,.2)}
     .role-card.secondary{border-color:rgba(90,173,255,.35);background:rgba(26,86,219,.11)}
@@ -178,7 +178,7 @@
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
     /* RESPONSIVE */
-    @media(max-width:860px){.wrapper{padding:0 20px 60px}.categories-grid{grid-template-columns:repeat(2,1fr)}.role-cards{grid-template-columns:repeat(3,1fr)}.result-hero{padding:44px 20px 36px}}
+    @media(max-width:860px){.wrapper{padding:0 20px 60px}.categories-grid{grid-template-columns:repeat(2,1fr)}.role-cards{grid-template-columns:repeat(3,1fr);gap:10px}.result-hero{padding:44px 20px 36px}}
     @media(max-width:600px){
       .wrapper{padding:0 13px 60px}.header{padding:40px 0 30px}
       h1.title{font-size:1.75rem}.header-sub{font-size:13px}
@@ -646,7 +646,7 @@ function buildRoleSection(sorted,readiness,avgs,total){
 
   const cards=document.getElementById("roleCards");
   cards.innerHTML="";
-  sorted.slice(0,6).forEach(([role,pct],i)=>{
+  sorted.slice(0,3).forEach(([role,pct],i)=>{
     const isPrimary=i===0;
     const isReady=readiness[role].ready;
     const card=document.createElement("div");
@@ -1032,7 +1032,7 @@ function downloadPDF(){
 
   // Role score bars
   sf(8,"bold",C.sky);doc.text("Role Alignment Scores",M,y);y+=8;
-  sorted.forEach(([role,pct2],i)=>{
+  sorted.slice(0,3).forEach(([role,pct2],i)=>{
     if(y>268)y=addPage();
     const bW=CW-55,filled=(pct2/100)*bW;
     const isPri=i===0;
